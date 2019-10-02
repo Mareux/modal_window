@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="styles.css">
+    <script src = "scripts.js" defer></script>
+
+    <button id = "trigger">Trigger</button>
+
+    <div id = "modal" class="modal">
+
+        <div id = "modal-content" class = "modal-content">
+            <div class = "modal-header">
+                <h2>To-Do list</h2>
+                <span class = "close">&times;</span>
+            </div>
+            <div class = "modal-body">
+                <form id = "todoList">
+                    <input type = "text" name = "title" maxlength="20" required><br>
+                    <input type = "text" name = "description"><br>
+                    <select name = "priority" required>
+                        <option value = "low">Low</option>
+                        <option value = "middle">Middle</option>
+                        <option value = "high">High</option>
+                    </select><br>
+                    <input type = "datetime-local" name = "deadline"><br>
+                </form>
+            </div>
+            <div class = "modal-footer">
+                <button id = "ok">Ok</button><br>
+                <button id = "cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</html>
