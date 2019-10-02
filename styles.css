@@ -13,12 +13,17 @@
 .modal-content {
     width: 50%;
     height: 50%;
+    position: relative;
+    margin: auto;   
     background-color: coral;
 }
+
+
 
 .modal-header {
     background-color: crimson;
     padding: 2px 16px;
+    color: white;
 }
 
 .close {
