@@ -2,12 +2,17 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
+    background-color: rgba(0,0,0,0.04);
+}
+
+:root {
+    --main-color: #3A8788;
 }
 
 .header {
     height: 48px;
     width: 100%;
-    background-color: #3A8788;
+    background-color: var(--main-color);
     font-size: 30px;
     color: white;
     padding: 8px 8px;
@@ -25,6 +30,7 @@ body {
     min-width: 256px;
     margin: 12px;
     padding: 8px;
+    background-color: white;
     border-radius: 4px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
@@ -46,10 +52,6 @@ body {
 .todo span:hover{
     cursor: pointer;
 }
-
-/*.todo input{*/
-/*    float: left;*/
-/* }*/
 
 .modal {
     display: none;
@@ -98,8 +100,8 @@ input, select {
 }
 
 input:focus, select:focus {
-    border: 1px solid #3A8788;
-    outline: 1px solid #3A8788;
+    border: 1px solid var(--main-color);
+    outline: 1px solid var(--main-color);
 }
 
 .modal-body {
@@ -122,13 +124,13 @@ button {
     margin-left: 8px;
     background: inherit;
     font-weight: 800;
-    color: #3A8788;
+    color: var(--main-color);
     border-radius: 4px;
     text-transform: uppercase;
     border: 1px solid transparent;
 }
 button:hover, button:focus {
-    border: 1px solid #3A8788;
+    border: 1px solid var(--main-color);
     cursor: pointer;
     outline: none;
 }
@@ -143,8 +145,8 @@ button:hover, button:focus {
     position: absolute;
     bottom: 54px;
     right: 54px;
-    border-color: #3A8788;
-    background-color: #3A8788;
+    border-color: var(--main-color);
+    background-color: var(--main-color);
     width: 64px;
     height: 64px;
     min-width: 0;

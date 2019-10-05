@@ -10,32 +10,6 @@
 <div class="root"></div>
 <button id="trigger" class="fab">+</button>
 
-<div id="modal" class="modal">
-
-    <div id="modal-content" class="modal-content">
-        <div class="modal-header">
-            <h3>Add item</h3>
-        </div>
-
-        <form id="todoList" action="#" onsubmit="return submitForm()">
-            <div class="modal-body">
-                <input autofocus placeholder="Title" type="text" name="title" maxlength="20" required>
-                <input placeholder="Description" type="text" name="description">
-                <select name="priority" required>
-                    <option value="" selected disabled>Select priority...</option>
-                    <option value="Low">Low</option>
-                    <option value="Middle">Middle</option>
-                    <option value="High">High</option>
-                </select>
-                <input type="datetime-local" name="deadline">
-            </div>
-            <div class="modal-footer">
-                <button type="reset" id="cancel">Cancel</button>
-                <button type="submit" id="ok">Ok</button>
-            </div>
-        </form>
-
-    </div>
-</div>
+<div id="modal" class="modal"></div>
 </body>
 </html>

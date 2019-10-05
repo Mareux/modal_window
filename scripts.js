@@ -1,15 +1,21 @@
 let modal = document.getElementById("modal");
 let triggerButton = document.getElementById("trigger");
-let cancelButton = document.getElementById("cancel");
-let form = document.getElementById("todoList");
 
 triggerButton.onclick = function () {
     modal.style.display = "flex";
+    renderForm({
+        id: Date.now(),
+        title: "",
+        description: "",
+        priority: "",
+        deadline: "",
+        completed: false
+    }, false);
 };
 
-cancelButton.onclick = function () {
+function closeDialog() {
     modal.style.display = "none";
-};
+}
 
 window.onload = renderItems;
 
@@ -20,6 +26,37 @@ function updateTodos(todoList) {
 
 function loadTodos() {
     return JSON.parse(localStorage.getItem("todo-list") || "[]");
+}
+
+function renderForm(todo, edit) {
+
+    modal.innerHTML = `
+<div id="modal-content" class="modal-content">
+    <div class="modal-header">
+        <h3>${edit ? "Edit todo" : "Add todo"}</h3>
+    </div>
+    <form id="todoList" action="#">
+        <div class="modal-body" onsubmit="return false;">
+            <input autofocus value="${todo.title}" placeholder="Title" type="text" name="title" maxlength="20"
+                   required>
+            <input placeholder="Description" value="${todo.description}" type="text" name="description">
+            <select name="priority" required>
+                <option value=""  ${todo.priority || "selected"} disabled>Select priority...</option>
+                <option value="Low" ${todo.priority !== "Low" || "selected" }>Low</option>
+                <option value="Middle" ${todo.priority !== "Middle" || "selected"}>Middle</option>
+                <option value="High" ${todo.priority !== "High" || "selected"}>High</option>
+            </select>
+            <input value="${todo.deadline}" type="datetime-local" name="deadline">
+        </div>
+        <div class="modal-footer">
+            <button type="reset" id="cancel" onclick="closeDialog()">Cancel</button>
+            <button type="submit" id="ok">Ok</button>
+        </div>
+    </form>
+</div>
+    `;
+
+    modal.querySelector("form").onsubmit = () => submitForm(todo);
 }
 
 function renderItems() {
@@ -38,7 +75,8 @@ function renderItems() {
                 <button onclick="switchDone(${item.id})">
                     ${item.done ? "Mark as undone" : "Mark as done"}
                 </button>
-                <button>Edit</button>
+                ${item.done ? "" : `<button onclick='editItem(${item.id})'>Edit</button>
+`}
             `;
             div.className = "todo";
             if (item.done)
@@ -57,24 +95,38 @@ function switchDone(id) {
 
 }
 
+function editItem(id) {
+    const todoList = loadTodos();
+    const todo = todoList.find((item) => (item.id === id));
+
+    renderForm(todo, true);
+
+    modal.style.display = "flex";
+}
+
 function deleteItem(id) {
 
     const newTodoList = loadTodos().filter((item) => (item.id !== id));
     updateTodos(newTodoList);
 }
 
-function submitForm() {
-    const todo = {
-        id: Date.now(),
-        title: form["title"].value,
-        description: form["description"].value,
-        priority: form["priority"].value,
-        deadline: form["deadline"].value,
-        completed: false
-    };
+function submitForm(todo) {
+    const form = document.getElementById("todoList");
+
+    todo.title = form["title"].value;
+    todo.description = form["description"].value;
+    todo.priority = form["priority"].value;
+    todo.deadline = form["deadline"].value;
 
     const todoList = loadTodos();
-    todoList.push(todo);
+
+    const oldIndex = todoList.findIndex((item) => (item.id === todo.id));
+
+    if (oldIndex >= 0)
+        todoList[oldIndex] = todo;
+    else
+        todoList.push(todo);
+
     updateTodos(todoList);
 
     modal.style.display = "none";
