@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html>
+<head>
     <link rel="stylesheet" href="styles.css">
-    <script src = "scripts.js" defer></script>
+    <script src="scripts.js" defer></script>
+</head>
+<body>
 
-    <button id = "trigger">Trigger</button>
+<div class = "header">To do list</div>
+<div class="root"></div>
+<button id="trigger" class="fab">+</button>
 
-    <div id = "modal" class="modal">
+<div id="modal" class="modal">
 
-        <div id = "modal-content" class = "modal-content">
-            <div class = "modal-header">
-                <span class = "close">&times;</span>
-                <h2>To-Do list</h2>
-            </div>
-            <div class = "modal-body">
-                <form id = "todoList">
-                    <input type = "text" name = "title" maxlength="20" required><br>
-                    <input type = "text" name = "description"><br>
-                    <select name = "priority" required>
-                        <option value = "low">Low</option>
-                        <option value = "middle">Middle</option>
-                        <option value = "high">High</option>
-                    </select><br>
-                    <input type = "datetime-local" name = "deadline"><br>
-                </form>
-            </div>
-            <div class = "modal-footer">
-                <button id = "ok">Ok</button><br>
-                <button id = "cancel">Cancel</button>
-            </div>
+    <div id="modal-content" class="modal-content">
+        <div class="modal-header">
+            <h3>Add item</h3>
         </div>
-    </div>
 
+        <form id="todoList" action="#" onsubmit="return submitForm()">
+            <div class="modal-body">
+                <input autofocus placeholder="Title" type="text" name="title" maxlength="20" required>
+                <input placeholder="Description" type="text" name="description">
+                <select name="priority" required>
+                    <option value="" selected disabled>Select priority...</option>
+                    <option value="Low">Low</option>
+                    <option value="Middle">Middle</option>
+                    <option value="High">High</option>
+                </select>
+                <input type="datetime-local" name="deadline">
+            </div>
+            <div class="modal-footer">
+                <button type="reset" id="cancel">Cancel</button>
+                <button type="submit" id="ok">Ok</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
 </html>
