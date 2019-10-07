@@ -17,11 +17,11 @@ function closeDialog() {
     modal.style.display = "none";
 }
 
-window.onload = renderItems;
+window.onload = () => renderItems(loadTodos());
 
 function updateTodos(todoList) {
     localStorage.setItem("todo-list", JSON.stringify(todoList));
-    renderItems();
+    renderItems(todoList);
 }
 
 function loadTodos() {
@@ -38,7 +38,7 @@ function renderForm(todo, edit) {
     <form id="todoList" action="#">
         <div class="modal-body" onsubmit="return false;">
             <input autofocus value="${todo.title}" placeholder="Title" type="text" name="title" maxlength="20"
-                   required>
+                   required pattern="^[a-zA-Z0-9_ ]*$">
             <input placeholder="Description" value="${todo.description}" type="text" name="description">
             <select name="priority" required>
                 <option value=""  ${todo.priority || "selected"} disabled>Select priority...</option>
@@ -59,11 +59,11 @@ function renderForm(todo, edit) {
     modal.querySelector("form").onsubmit = () => submitForm(todo);
 }
 
-function renderItems() {
+function renderItems(todoList) {
 
     document.getElementsByClassName("root")[0].innerHTML = "";
 
-    loadTodos()
+    todoList
         .forEach((item) => {
             const div = document.createElement('div');
             div.innerHTML = `
@@ -83,6 +83,22 @@ function renderItems() {
                 div.className += " done";
             document.getElementsByClassName("root")[0].appendChild(div);
         });
+}
+
+function sortItem() {
+
+
+
+}
+
+function itemSearch() {
+    const searchString = document.getElementById("search").value;
+
+    const newList = loadTodos().filter((item) => (item.title.includes(searchString)
+        || item.description.includes(searchString)
+        || item.deadline.includes(searchString)
+        || item.data.includes(searchString)));
+    renderItems(newList);
 }
 
 function switchDone(id) {
@@ -116,7 +132,7 @@ function submitForm(todo) {
     todo.title = form["title"].value;
     todo.description = form["description"].value;
     todo.priority = form["priority"].value;
-    todo.deadline = form["deadline"].value;
+    todo.deadline = new Date(form["deadline"].value).toDateString();
 
     const todoList = loadTodos();
 
