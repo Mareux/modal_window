@@ -46,7 +46,7 @@ function renderForm(todo, edit) {
                 <option value="Middle" ${todo.priority !== "Middle" || "selected"}>Middle</option>
                 <option value="High" ${todo.priority !== "High" || "selected"}>High</option>
             </select>
-            <input value="${todo.deadline}" type="datetime-local" name="deadline">
+            <input value="${todo.deadline}" type="date" name="deadline">
         </div>
         <div class="modal-footer">
             <button type="reset" id="cancel" onclick="closeDialog()">Cancel</button>
@@ -97,7 +97,8 @@ function itemSearch() {
     const newList = loadTodos().filter((item) => (item.title.includes(searchString)
         || item.description.includes(searchString)
         || item.deadline.includes(searchString)
-        || item.data.includes(searchString)));
+        || item.priority.includes(searchString)
+        ));
     renderItems(newList);
 }
 
@@ -132,7 +133,7 @@ function submitForm(todo) {
     todo.title = form["title"].value;
     todo.description = form["description"].value;
     todo.priority = form["priority"].value;
-    todo.deadline = new Date(form["deadline"].value).toDateString();
+    todo.deadline = form["deadline"].value;
 
     const todoList = loadTodos();
 
