@@ -1,8 +1,23 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     background-color: rgba(0,0,0,0.04);
+}
+
+.sort-filters{
+    display: flex;
+    flex-direction: row;
+    background-color: #ECE497;
+    padding: 1px 12px;
+    font-size: 16px;
+    color: var(--main-color);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+}
+
+.sort-filters button:focus {
+    border: 1px solid #ECE497;
 }
 
 :root {
@@ -11,7 +26,6 @@ body {
 
 .header {
     height: 48px;
-    width: 100%;
     background-color: var(--main-color);
     font-size: 30px;
     color: white;

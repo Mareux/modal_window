@@ -2,13 +2,22 @@
 <html>
 <head>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
     <script src="scripts.js" defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div class = "header">To do list
     <input placeholder="search:" id = "search" oninput="itemSearch()">
 </div>
+
+<div class = "sort-filters">
+    <p>Sort by:</p>
+    <button onclick="sortItemsByCompletion()">Completion</button>
+    <button onclick="sortItemsByPriority()">Priority</button>
+</div>
+
 <div class="root"></div>
 <button id="trigger" class="fab">+</button>
 

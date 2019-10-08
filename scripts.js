@@ -9,7 +9,7 @@ triggerButton.onclick = function () {
         description: "",
         priority: "",
         deadline: "",
-        completed: false
+        done: false
     }, false);
 };
 
@@ -85,9 +85,28 @@ function renderItems(todoList) {
         });
 }
 
-function sortItem() {
+function sortItemsByPriority() {
 
+    const newList = loadTodos().sort((a,b) => {
+       if (a.priority > b.priority)
+           return 1;
+       if (a.priority < b.priority)
+           return -1;
+       return 0;
+    });
 
+    updateTodos(newList);
+}
+
+function sortItemsByCompletion() {
+
+    const newList = loadTodos().sort((a, b) => {
+        if (a.done > b.done)
+            return -1;
+        return 1;
+    });
+
+    updateTodos(newList);
 
 }
 
